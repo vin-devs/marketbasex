@@ -44,7 +44,7 @@ const updateCategory = asyncHandler(async (req, res) => {
 
 const removeCategory = asyncHandler(async (req, res) => {
   try {
-    const removed = await Category.findByIdAndRemove(req.params.categoryId);
+    const removed = await Category.findByIdAndDelete(req.params.categoryId);
     res.json(removed);
   } catch (error) {
     console.error(error);
@@ -64,7 +64,7 @@ const listCategory = asyncHandler(async (req, res) => {
 
 const readCategory = asyncHandler(async (req, res) => {
   try {
-    const category = await Category.findOne({ _id: params.id });
+    const category = await Category.findOne({ _id: req.params.categoryId });
     res.json(category);
   } catch (error) {
     console.log(error);
