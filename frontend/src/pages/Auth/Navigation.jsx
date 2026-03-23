@@ -14,6 +14,7 @@ import "./Navigation.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../../redux/api/usersApiSlice";
 import { logout } from "../../redux/features/auth/authSlice";
+import FavoritesCount from "../Products/FavoritesCount";
 
 const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -60,16 +61,16 @@ const Navigation = () => {
           to="/"
           className="flex items-center transition-transform transform hover:translate-x-2"
         >
-          <AiOutlineHome className="mr-2 mt-[3-rem]" size={30} />
-          <span className="hidden nav-item-name mt-[3-rem]">HOME</span>
+          <AiOutlineHome className="mr-2 mt-[3rem]" size={30} />
+          <span className="hidden nav-item-name mt-[3rem]">HOME</span>
           {""}
         </Link>
         <Link
           to="/shop"
           className="flex items-center transition-transform transform hover:translate-x-2"
         >
-          <AiOutlineShopping className="mr-2 mt-[3-rem]" size={30} />
-          <span className="hidden nav-item-name mt-[3-rem]">SHOP </span>
+          <AiOutlineShopping className="mr-2 mt-[3rem]" size={30} />
+          <span className="hidden nav-item-name mt-[3rem]">SHOP </span>
           {""}
         </Link>
 
@@ -77,17 +78,17 @@ const Navigation = () => {
           to="/cart"
           className="flex items-center transition-transform transform hover:translate-x-2"
         >
-          <AiOutlineShoppingCart className="mr-2 mt-[3-rem]" size={30} />
-          <span className="hidden nav-item-name mt-[3-rem]">CART</span>
+          <AiOutlineShoppingCart className="mr-2 mt-[3rem]" size={30} />
+          <span className="hidden nav-item-name mt-[3rem]">CART</span>
           {""}
         </Link>
-        <Link
-          to="/favorite"
-          className="flex items-center transition-transform transform hover:translate-x-2"
-        >
-          <FaHeart className="mr-2 mt-[3-rem]" size={30} />
-          <span className="hidden nav-item-name mt-[3-rem]">Favorite</span>
-          {""}
+        <Link to="/favorite" className="flex relative">
+          <div className="flex justify-center items-center transition-transform transform hover:translate-x-2">
+            <FaHeart className="mr-2 mt-[3rem]" size={30} />
+            <span className="hidden nav-item-name mt-[3rem]">Favorite</span>
+            {""}
+            <FavoritesCount />
+          </div>
         </Link>
       </div>
 

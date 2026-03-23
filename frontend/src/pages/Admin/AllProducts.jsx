@@ -48,8 +48,8 @@ const AllProducts = () => {
                       {product?.description?.substring(0, 160)}...
                     </p>
 
-                    <div className="flex justify-">
-                      <Link
+                    <div className="flex justify-between">
+                      <button
                         to={`/admin/product/update/${product._id}`}
                         className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-pink-700 rounded-lg hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800"
                       >
@@ -69,7 +69,7 @@ const AllProducts = () => {
                             d="M1 5h12m0 0L9 1m4 4L9 9"
                           />
                         </svg>
-                      </Link>
+                      </button>
                       <p>$ {product?.price}</p>
                     </div>
                   </div>
