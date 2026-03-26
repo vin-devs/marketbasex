@@ -3,7 +3,7 @@ import path from "path";
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import cors from "cors"; // 1. Added this import
+import cors from "cors";
 
 // utils
 import connectDB from "./config/db.js";
@@ -19,14 +19,15 @@ const port = process.env.PORT || 5000;
 connectDB();
 const app = express();
 
-// 2. Added CORS Middleware Configuration
+// Updated CORS Middleware Configuration
 app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://marketbasex-ki1yihvn0-mutukuvincent752-7467s-projects.vercel.app",
+      "https://marketbasex.vercel.app", // Clean Production Domain
+      "https://marketbasex-ki1yihvn0-mutukuvincent752-7467s-projects.vercel.app", // Preview Domain
     ],
-    credentials: true, // Required for cookies/sessions to work
+    credentials: true,
   }),
 );
 
