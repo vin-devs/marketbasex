@@ -1,8 +1,6 @@
 // constants.js
-export const BASE_URL =
-  import.meta.env.MODE === "development"
-    ? "" // This uses the proxy in vite.config.js for local dev
-    : "https://marketbasex-backend.onrender.com"; // Your live Render API
+// No logic, no MODE checks, just the direct link to your backend
+export const BASE_URL = "https://marketbasex-backend.onrender.com";
 
 export const USERS_URL = `${BASE_URL}/api/users`;
 export const CATEGORY_URL = `${BASE_URL}/api/category`;
