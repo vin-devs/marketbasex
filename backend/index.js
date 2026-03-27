@@ -19,7 +19,7 @@ const port = process.env.PORT || 5000;
 connectDB();
 const app = express();
 
-// 1. Fully Enhanced CORS Configuration
+// 1. Enhanced CORS Configuration
 app.use(
   cors({
     origin: [
@@ -29,15 +29,20 @@ app.use(
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"], // Required for JSON/Auth requests
+    allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
 
-// 2. IMPORTANT: Manually handle OPTIONS preflight requests
-// This ensures the browser "handshake" succeeds immediately
-app.options("*", cors());
+// 2. Manual Handshake Handler (Replaces the "poisonous" app.options("*"))
+// This tells the browser the server is ready for the POST request
+app.use((req, res, next) => {
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+  next();
+});
 
-// 3. Keep your payload limits
+// 3. Increased Payload Limits (Fixes silent 500 errors for large image data)
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser());
