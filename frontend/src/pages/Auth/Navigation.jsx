@@ -15,21 +15,37 @@ import { logout } from "../../redux/features/auth/authSlice";
 import FavoritesCount from "../Products/FavoritesCount";
 
 const MarketBaseLogo = ({ isExpanded, mobile }) => (
-  <div
-    className={`flex items-center ${mobile ? "justify-start" : isExpanded ? "justify-start px-3" : "justify-center"}`}
+  <Link
+    to="/"
+    className={`flex items-center group/logo transition-all duration-300 ${
+      mobile
+        ? "justify-start"
+        : isExpanded
+          ? "justify-start px-3"
+          : "justify-center"
+    }`}
   >
-    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-600 to-pink-600 font-black text-white shadow-lg shadow-indigo-600/20">
+    {/* Hex Icon with Rotation and Glow */}
+    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-600 to-pink-600 font-black text-white shadow-lg shadow-indigo-600/30 transition-transform duration-500 group-hover/logo:rotate-[360deg]">
       <span className="text-sm">X</span>
     </div>
+
+    {/* Text Label */}
     {(isExpanded || mobile) && (
-      <div className="ml-2 flex flex-col leading-none">
+      <div className="ml-3 flex flex-col leading-none">
         <span className="font-black text-sm text-white uppercase tracking-tighter">
-          Market<span className="text-indigo-500">Base</span>
+          Market
+          <span className="text-indigo-500 transition-colors group-hover/logo:text-indigo-400">
+            Base
+          </span>
           <span className="text-pink-500 italic ml-0.5">X</span>
+        </span>
+        <span className="text-[8px] font-bold text-slate-600 tracking-[3px] uppercase mt-0.5 group-hover/logo:text-slate-400 transition-colors">
+          Digital Store
         </span>
       </div>
     )}
-  </div>
+  </Link>
 );
 
 const Navigation = () => {
@@ -64,7 +80,11 @@ const Navigation = () => {
     <Link
       to={to}
       onClick={() => mobile && setShowMobileMenu(false)}
-      className={`group relative flex items-center transition-all ${mobile ? "flex-col justify-center py-1" : "p-3 my-2 rounded-xl hover:bg-indigo-600/10"}`}
+      className={`group relative flex items-center transition-all ${
+        mobile
+          ? "flex-col justify-center py-1"
+          : "p-3 my-2 rounded-xl hover:bg-indigo-600/10"
+      }`}
     >
       <div className="relative flex items-center justify-center">
         <Icon
@@ -73,13 +93,19 @@ const Navigation = () => {
         />
         {BadgeComponent && <BadgeComponent />}
         {!BadgeComponent && badgeCount > 0 && (
-          <div className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-indigo-600 text-[8px] font-bold text-white">
+          <div className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-indigo-600 text-[8px] font-bold text-white shadow-sm shadow-black/50">
             {badgeCount}
           </div>
         )}
       </div>
       <span
-        className={`${mobile ? "text-[10px] mt-1 text-slate-500" : `ml-4 text-sm font-medium transition-all duration-300 ${isExpanded ? "opacity-100" : "opacity-0 pointer-events-none"}`}`}
+        className={`${
+          mobile
+            ? "text-[10px] mt-1 text-slate-500"
+            : `ml-4 text-sm font-medium transition-all duration-300 ${
+                isExpanded ? "opacity-100" : "opacity-0 pointer-events-none"
+              }`
+        }`}
       >
         {label}
       </span>
@@ -92,7 +118,9 @@ const Navigation = () => {
       <nav
         onMouseEnter={() => setIsExpanded(true)}
         onMouseLeave={() => setIsExpanded(false)}
-        className={`hidden md:flex fixed left-0 top-0 h-screen z-[999] flex-col justify-between border-r border-slate-800 bg-[#0a0a0c]/95 backdrop-blur-xl transition-all duration-300 ${isExpanded ? "w-64 px-4 shadow-2xl" : "w-20 px-2"}`}
+        className={`hidden md:flex fixed left-0 top-0 h-screen z-[999] flex-col justify-between border-r border-slate-800 bg-[#0a0a0c]/95 backdrop-blur-xl transition-all duration-300 ${
+          isExpanded ? "w-64 px-4 shadow-2xl" : "w-20 px-2"
+        }`}
       >
         <div className="flex flex-col mt-8">
           <MarketBaseLogo isExpanded={isExpanded} />
@@ -114,13 +142,16 @@ const Navigation = () => {
           </div>
         </div>
 
+        {/* User / Auth Section */}
         <div className="mb-8">
           {userInfo ? (
             <div className="group relative">
               <button
-                className={`flex items-center w-full p-3 rounded-xl hover:bg-slate-800/50 ${!isExpanded && "justify-center"}`}
+                className={`flex items-center w-full p-3 rounded-xl hover:bg-slate-800/50 transition-all ${
+                  !isExpanded && "justify-center"
+                }`}
               >
-                <div className="h-8 w-8 rounded-full bg-indigo-500 flex items-center justify-center text-white font-bold text-xs uppercase">
+                <div className="h-8 w-8 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-700 flex items-center justify-center text-white font-bold text-xs uppercase shadow-inner">
                   {userInfo.username.charAt(0)}
                 </div>
                 {isExpanded && (
@@ -132,56 +163,57 @@ const Navigation = () => {
                 )}
               </button>
 
-              <div className="absolute bottom-full left-0 w-64 mb-2 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all bg-slate-900 border border-slate-800 rounded-xl p-2 shadow-2xl z-[1001]">
+              {/* Desktop User Menu Dropup */}
+              <div className="absolute bottom-full left-0 w-64 mb-2 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200 bg-[#111114] border border-slate-800 rounded-2xl p-2 shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-[1001]">
                 {userInfo.isAdmin && (
-                  <div className="border-b border-slate-800 mb-2 pb-2">
-                    <p className="px-4 py-2 text-[10px] font-black text-indigo-500 uppercase tracking-widest">
+                  <div className="border-b border-slate-800/60 mb-2 pb-2">
+                    <p className="px-4 py-2 text-[9px] font-black text-indigo-500 uppercase tracking-[3px]">
                       Store Mgmt
                     </p>
                     <Link
                       to="/admin/dashboard"
-                      className="block px-4 py-2 text-xs text-slate-300 hover:bg-indigo-600 rounded-lg"
+                      className="block px-4 py-2 text-xs text-slate-300 hover:bg-indigo-600 rounded-lg transition-colors"
                     >
                       Dashboard
                     </Link>
                     <Link
                       to="/admin/productlist"
-                      className="block px-4 py-2 text-xs text-slate-300 hover:bg-indigo-600 rounded-lg"
+                      className="block px-4 py-2 text-xs text-slate-300 hover:bg-indigo-600 rounded-lg transition-colors"
                     >
                       Products
                     </Link>
                     <Link
                       to="/admin/categorylist"
-                      className="block px-4 py-2 text-xs text-slate-300 hover:bg-indigo-600 rounded-lg"
+                      className="block px-4 py-2 text-xs text-slate-300 hover:bg-indigo-600 rounded-lg transition-colors"
                     >
                       Categories
                     </Link>
                     <Link
                       to="/admin/orderlist"
-                      className="block px-4 py-2 text-xs text-slate-300 hover:bg-indigo-600 rounded-lg"
+                      className="block px-4 py-2 text-xs text-slate-300 hover:bg-indigo-600 rounded-lg transition-colors"
                     >
                       Orders
                     </Link>
                     <Link
                       to="/admin/userlist"
-                      className="block px-4 py-2 text-xs text-slate-300 hover:bg-indigo-600 rounded-lg"
+                      className="block px-4 py-2 text-xs text-slate-300 hover:bg-indigo-600 rounded-lg transition-colors"
                     >
                       Users
                     </Link>
                   </div>
                 )}
-                <p className="px-4 py-2 text-[10px] font-black text-slate-500 uppercase tracking-widest">
+                <p className="px-4 py-2 text-[9px] font-black text-slate-500 uppercase tracking-[3px]">
                   Account
                 </p>
                 <Link
                   to="/profile"
-                  className="block px-4 py-2 text-xs text-slate-300 hover:bg-indigo-600 rounded-lg"
+                  className="block px-4 py-2 text-xs text-slate-300 hover:bg-indigo-600 rounded-lg transition-colors"
                 >
                   Profile
                 </Link>
                 <button
                   onClick={logoutHandler}
-                  className="w-full text-left px-4 py-2 text-xs text-red-400 hover:bg-red-500/10 rounded-lg"
+                  className="w-full text-left px-4 py-2 text-xs text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
                 >
                   Logout
                 </button>
@@ -223,7 +255,7 @@ const Navigation = () => {
             onClick={() => setShowMobileMenu(true)}
             className="flex flex-col items-center justify-center py-1"
           >
-            <div className="h-6 w-6 rounded-full bg-indigo-600 flex items-center justify-center text-[10px] font-bold text-white uppercase">
+            <div className="h-6 w-6 rounded-full bg-indigo-600 flex items-center justify-center text-[10px] font-bold text-white uppercase shadow-md">
               {userInfo.username.charAt(0)}
             </div>
             <span className="text-[10px] mt-1 text-slate-500">Menu</span>
@@ -235,75 +267,58 @@ const Navigation = () => {
 
       {/* --- MOBILE FULLSCREEN MENU --- */}
       {showMobileMenu && (
-        <div className="md:hidden fixed inset-0 bg-[#0a0a0c] z-[1000] p-6 flex flex-col animate-in fade-in slide-in-from-bottom duration-300 overflow-y-auto">
+        <div className="md:hidden fixed inset-0 bg-[#0a0a0c] z-[1000] p-6 flex flex-col animate-in fade-in slide-in-from-bottom-10 duration-300 overflow-y-auto">
           <div className="flex justify-between items-center mb-10">
             <MarketBaseLogo mobile />
             <button
               onClick={() => setShowMobileMenu(false)}
-              className="text-white text-2xl p-2 bg-slate-800 rounded-full"
+              className="text-white text-xl p-3 bg-slate-800/50 hover:bg-slate-800 rounded-full transition-colors"
             >
               <AiOutlineClose />
             </button>
           </div>
-          <div className="flex-1 space-y-8">
+
+          <div className="flex-1 space-y-10">
             {userInfo?.isAdmin && (
-              <div className="space-y-4 border-b border-slate-800 pb-8">
-                <p className="text-[10px] font-black text-indigo-500 uppercase tracking-[4px]">
+              <div className="space-y-6 border-b border-slate-800 pb-10">
+                <p className="text-[10px] font-black text-indigo-500 uppercase tracking-[5px]">
                   Admin Control
                 </p>
                 <div className="grid grid-cols-1 gap-6">
-                  <Link
-                    to="/admin/dashboard"
-                    onClick={() => setShowMobileMenu(false)}
-                    className="text-2xl font-bold text-white"
-                  >
-                    Dashboard
-                  </Link>
-                  <Link
-                    to="/admin/productlist"
-                    onClick={() => setShowMobileMenu(false)}
-                    className="text-2xl font-bold text-white"
-                  >
-                    Products
-                  </Link>
-                  <Link
-                    to="/admin/categorylist"
-                    onClick={() => setShowMobileMenu(false)}
-                    className="text-2xl font-bold text-white"
-                  >
-                    Categories
-                  </Link>
-                  <Link
-                    to="/admin/orderlist"
-                    onClick={() => setShowMobileMenu(false)}
-                    className="text-2xl font-bold text-white"
-                  >
-                    Orders
-                  </Link>
-                  <Link
-                    to="/admin/userlist"
-                    onClick={() => setShowMobileMenu(false)}
-                    className="text-2xl font-bold text-white"
-                  >
-                    User List
-                  </Link>
+                  {[
+                    "Dashboard",
+                    "Products",
+                    "Categories",
+                    "Orders",
+                    "User List",
+                  ].map((item) => (
+                    <Link
+                      key={item}
+                      to={`/admin/${item.toLowerCase().replace(" ", "")}`}
+                      onClick={() => setShowMobileMenu(false)}
+                      className="text-3xl font-black text-white hover:text-indigo-500 transition-colors uppercase tracking-tighter"
+                    >
+                      {item}
+                    </Link>
+                  ))}
                 </div>
               </div>
             )}
+
             <div className="space-y-6">
-              <p className="text-[10px] font-black text-slate-500 uppercase tracking-[4px]">
+              <p className="text-[10px] font-black text-slate-500 uppercase tracking-[5px]">
                 Personal
               </p>
               <Link
                 to="/profile"
                 onClick={() => setShowMobileMenu(false)}
-                className="block text-2xl font-bold text-white"
+                className="block text-3xl font-black text-white hover:text-indigo-500 transition-colors uppercase tracking-tighter"
               >
                 My Profile
               </Link>
               <button
                 onClick={logoutHandler}
-                className="block text-2xl text-red-500 font-bold pt-4"
+                className="block text-3xl text-red-500 font-black pt-4 uppercase tracking-tighter"
               >
                 Logout
               </button>

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRegisterMutation } from "../../redux/api/usersApiSlice";
 import { setCredentials } from "../../redux/features/auth/authSlice";
 import { toast } from "react-toastify";
-import { FaEye, FaEyeSlash } from "react-icons/fa"; // Added icons
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Loader from "../../components/Loader";
 
 const Register = () => {
@@ -12,7 +12,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // New state
+  const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -79,15 +79,17 @@ const Register = () => {
       {/* Right Side: Form Section */}
       <div className="flex w-full flex-col justify-center px-8 py-12 lg:w-[550px] bg-[#0a0a0c] border-l border-slate-800/60 shadow-2xl">
         <div className="mx-auto w-full max-w-sm">
-          {/* Logo Brand Mark */}
-          <div className="mb-14 flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-600 to-pink-600 shadow-lg shadow-indigo-600/30">
+          {/* MarketBaseX Integrated Logo */}
+          <div className="mb-14 flex items-center gap-4 group cursor-default">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-600 to-pink-600 shadow-lg shadow-indigo-600/30 transition-transform duration-500 group-hover:rotate-[360deg]">
               <svg
                 className="w-6 h-6 text-white"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
                 <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
@@ -95,9 +97,15 @@ const Register = () => {
               </svg>
             </div>
             <div className="flex flex-col leading-none">
-              <span className="text-2xl font-black text-white tracking-tighter uppercase">
+              <span className="text-2xl font-black text-white tracking-tighter uppercase flex items-center gap-1">
                 Market<span className="text-indigo-500">Base</span>
-                <span className="text-pink-500 italic">X</span>
+                {/* The "X" Logo Icon integration */}
+                <div className="flex items-center justify-center bg-gradient-to-r from-pink-500 to-indigo-500 bg-clip-text text-transparent italic">
+                  X
+                </div>
+              </span>
+              <span className="text-[9px] font-bold text-slate-600 tracking-[3px] uppercase mt-1">
+                Digital Store
               </span>
             </div>
           </div>
@@ -112,6 +120,7 @@ const Register = () => {
           </div>
 
           <form onSubmit={submitHandler} className="space-y-5">
+            {/* ... rest of your form inputs (Full Name, Email, Password) remain the same ... */}
             <div className="flex flex-col gap-2">
               <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">
                 Full Name
@@ -140,7 +149,6 @@ const Register = () => {
               />
             </div>
 
-            {/* Password Input */}
             <div className="flex flex-col gap-2">
               <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">
                 Password
@@ -168,7 +176,6 @@ const Register = () => {
               </div>
             </div>
 
-            {/* Confirm Password Input */}
             <div className="flex flex-col gap-2">
               <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">
                 Confirm Password
@@ -201,7 +208,7 @@ const Register = () => {
               type="submit"
               className="w-full py-4 bg-indigo-600 text-white rounded-2xl font-bold uppercase tracking-widest text-[11px] hover:bg-indigo-500 shadow-lg shadow-indigo-600/20 transition-all active:scale-95 mt-4"
             >
-              {isLoading ? "Creating Account..." : "Create Account"}
+              {isLoading ? <Loader size="sm" /> : "Create Account"}
             </button>
           </form>
 
@@ -210,7 +217,7 @@ const Register = () => {
               Already have an account?{" "}
               <Link
                 to={redirect ? `/login?redirect=${redirect}` : "/login"}
-                className="text-indigo-400 hover:text-white ml-2"
+                className="text-indigo-400 hover:text-white ml-2 transition-colors"
               >
                 Log In
               </Link>
