@@ -14,9 +14,9 @@ MarketBaseX is a robust, production-ready e-commerce solution designed for high 
 
 ![MarketBaseX Homepage](./assets/screenshots/homepage.png)
 
-### 📊 Admin Dashboard
+### 📊 Admin Menu
 
-![MarketBaseX Admin Dashboard](./assets/screenshots/admindashboard.png)
+![MarketBaseX Admin Dashboard](./assets/screenshots/adminmenu.png)
 
 ---
 
