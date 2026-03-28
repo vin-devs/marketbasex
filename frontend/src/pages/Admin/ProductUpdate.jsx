@@ -94,11 +94,11 @@ const ProductUpdate = () => {
   };
 
   return (
-    <div className="bg-[#0a0a0c] min-h-screen text-white pb-20">
+    <div className="bg-[#0a0a0c] min-h-screen text-white pb-32">
       <AdminMenu />
 
-      <div className="container mx-auto px-4 pt-[6rem]">
-        {/* Header with Back Button */}
+      <div className="container mx-auto px-5 pt-[6rem]">
+        {/* Header */}
         <div className="flex items-center justify-between mb-10">
           <div className="flex items-center gap-4">
             <div className="p-3 bg-indigo-600/20 rounded-2xl text-indigo-400">
@@ -110,7 +110,7 @@ const ProductUpdate = () => {
           </div>
           <button
             onClick={() => navigate(-1)}
-            className="flex items-center gap-2 text-slate-500 hover:text-white transition-colors font-bold uppercase text-xs tracking-widest"
+            className="flex items-center gap-2 text-slate-500 hover:text-white transition-colors font-bold uppercase text-[10px] tracking-widest"
           >
             <FaChevronLeft size={10} /> Go Back
           </button>
@@ -119,19 +119,19 @@ const ProductUpdate = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           {/* Left: Image Management */}
           <div className="lg:col-span-1">
-            <div className="bg-slate-900/40 border border-slate-800 p-2 rounded-[2.5rem] backdrop-blur-md shadow-2xl sticky top-[8rem]">
+            <div className="bg-slate-900/60 border border-slate-800 p-2 rounded-[2.5rem] backdrop-blur-md shadow-2xl sticky top-[8rem]">
               <div className="relative group overflow-hidden rounded-[2rem]">
                 <img
                   src={image}
                   alt={name}
                   className="w-full h-[400px] object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <label className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 opacity-0 group-hover:opacity-100 transition-all cursor-pointer">
+                <label className="absolute inset-0 flex flex-col items-center justify-center bg-black/70 opacity-0 group-hover:opacity-100 transition-all cursor-pointer">
                   <FaCloudUploadAlt
                     size={30}
                     className="mb-2 text-indigo-400"
                   />
-                  <span className="text-[10px] font-black uppercase tracking-[2px]">
+                  <span className="text-xs font-bold uppercase tracking-widest">
                     Replace Image
                   </span>
                   <input
@@ -146,93 +146,95 @@ const ProductUpdate = () => {
           </div>
 
           {/* Right: Detailed Edit Form */}
-          <div className="lg:col-span-2 bg-slate-900/40 border border-slate-800 p-8 rounded-[2.5rem] backdrop-blur-md shadow-2xl">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="flex flex-col gap-2">
-                <label className="text-xs font-black uppercase tracking-[2px] text-slate-500 ml-1">
+          <div className="lg:col-span-2 bg-slate-900/60 border border-slate-800 p-8 md:p-10 rounded-[2.5rem] backdrop-blur-md shadow-2xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="flex flex-col gap-3">
+                <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">
                   Name
                 </label>
                 <input
                   type="text"
-                  className="bg-slate-800/50 border border-slate-700 p-4 rounded-2xl focus:border-indigo-500 transition-all outline-none"
+                  className="bg-slate-800/50 border border-slate-700/50 p-4 rounded-2xl text-white focus:border-indigo-500 outline-none transition-all font-medium"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
 
-              <div className="flex flex-col gap-2">
-                <label className="text-xs font-black uppercase tracking-[2px] text-slate-500 ml-1">
+              <div className="flex flex-col gap-3">
+                <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">
                   Price ($)
                 </label>
                 <input
                   type="number"
-                  className="bg-slate-800/50 border border-slate-700 p-4 rounded-2xl focus:border-indigo-500 transition-all outline-none"
+                  className="bg-slate-800/50 border border-slate-700/50 p-4 rounded-2xl text-white focus:border-indigo-500 outline-none transition-all font-medium"
                   value={price}
                   onChange={(e) => setPrice(Number(e.target.value))}
                 />
               </div>
 
-              <div className="flex flex-col gap-2 md:col-span-2">
-                <label className="text-xs font-black uppercase tracking-[2px] text-slate-500 ml-1">
+              <div className="flex flex-col gap-3 md:col-span-2">
+                <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">
                   Description
                 </label>
                 <textarea
                   rows="4"
-                  className="bg-slate-800/50 border border-slate-700 p-4 rounded-2xl focus:border-indigo-500 transition-all outline-none resize-none"
+                  className="bg-slate-800/50 border border-slate-700/50 p-4 rounded-2xl text-white focus:border-indigo-500 outline-none transition-all resize-none font-medium leading-relaxed"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
               </div>
 
-              <div className="flex flex-col gap-2">
-                <label className="text-xs font-black uppercase tracking-[2px] text-slate-500 ml-1">
+              <div className="flex flex-col gap-3">
+                <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">
                   Stock
                 </label>
                 <input
                   type="number"
-                  className="bg-slate-800/50 border border-slate-700 p-4 rounded-2xl focus:border-indigo-500 transition-all outline-none"
+                  className="bg-slate-800/50 border border-slate-700/50 p-4 rounded-2xl text-white focus:border-indigo-500 outline-none transition-all font-medium"
                   value={stock}
                   onChange={(e) => setStock(Number(e.target.value))}
                 />
               </div>
 
-              <div className="flex flex-col gap-2">
-                <label className="text-xs font-black uppercase tracking-[2px] text-slate-500 ml-1">
+              <div className="flex flex-col gap-3">
+                <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">
                   Category
                 </label>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="bg-slate-800/50 border border-slate-700 p-4 rounded-2xl focus:border-indigo-500 transition-all outline-none appearance-none"
+                  className="bg-slate-800/50 border border-slate-700/50 p-4 rounded-2xl text-white focus:border-indigo-500 outline-none transition-all cursor-pointer font-medium"
                 >
-                  <option value="">Select Category</option>
+                  <option value="" className="bg-slate-900">
+                    Select Category
+                  </option>
                   {categories.map((c) => (
-                    <option key={c._id} value={c._id}>
+                    <option key={c._id} value={c._id} className="bg-slate-900">
                       {c.name}
                     </option>
                   ))}
                 </select>
               </div>
 
-              <div className="flex flex-col gap-2">
-                <label className="text-xs font-black uppercase tracking-[2px] text-slate-500 ml-1">
+              <div className="flex flex-col gap-3">
+                <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">
                   Quantity
                 </label>
                 <input
                   type="number"
-                  className="bg-slate-800/50 border border-slate-700 p-4 rounded-2xl focus:border-indigo-500 transition-all outline-none"
+                  className="bg-slate-800/50 border border-slate-700/50 p-4 rounded-2xl text-white focus:border-indigo-500 outline-none transition-all font-medium"
                   value={quantity}
                   onChange={(e) => setQuantity(Number(e.target.value))}
                 />
               </div>
 
-              <div className="flex flex-col gap-2">
-                <label className="text-xs font-black uppercase tracking-[2px] text-slate-500 ml-1">
+              <div className="flex flex-col gap-3">
+                <label className="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">
                   Brand
                 </label>
                 <input
                   type="text"
-                  className="bg-slate-800/50 border border-slate-700 p-4 rounded-2xl focus:border-indigo-500 transition-all outline-none"
+                  className="bg-slate-800/50 border border-slate-700/50 p-4 rounded-2xl text-white focus:border-indigo-500 outline-none transition-all font-medium"
                   value={brand}
                   onChange={(e) => setBrand(e.target.value)}
                 />
@@ -243,13 +245,13 @@ const ProductUpdate = () => {
             <div className="flex flex-col sm:flex-row gap-4 mt-10">
               <button
                 onClick={handleSubmit}
-                className="flex-1 py-4 bg-emerald-600 text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-emerald-500 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all active:scale-95"
+                className="flex-1 py-4 bg-emerald-600 text-white font-bold uppercase tracking-widest text-sm rounded-2xl hover:bg-emerald-500 transition-all active:scale-95 shadow-lg shadow-emerald-900/20"
               >
                 Save Changes
               </button>
               <button
                 onClick={handleDelete}
-                className="flex-1 py-4 bg-rose-600/10 text-rose-500 border border-rose-500/20 font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-rose-600 hover:text-white transition-all active:scale-95 flex items-center justify-center gap-2"
+                className="flex-1 py-4 bg-rose-600/10 text-rose-500 border border-rose-500/20 font-bold uppercase tracking-widest text-sm rounded-2xl hover:bg-rose-600 hover:text-white transition-all active:scale-95 flex items-center justify-center gap-2"
               >
                 <FaTrash size={12} /> Delete Product
               </button>

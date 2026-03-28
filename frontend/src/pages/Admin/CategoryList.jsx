@@ -31,10 +31,10 @@ const CategoryList = () => {
     try {
       const result = await createCategory({ name }).unwrap();
       setName("");
-      toast.success(`${result.name} is created.`);
+      toast.success(`${result.name} created successfully.`);
       refetch();
     } catch (error) {
-      toast.error("Creating category failed, try again.");
+      toast.error("Failed to create category.");
     }
   };
 
@@ -49,65 +49,61 @@ const CategoryList = () => {
         categoryId: selectedCategory._id,
         name: updatingName,
       }).unwrap();
-      toast.success(`${result.name} is updated`);
+      toast.success(`${result.name} updated`);
       setSelectedCategory(null);
       setUpdatingName("");
       setModalVisible(false);
       refetch();
     } catch (error) {
-      toast.error("Update failed. Please try again.");
+      toast.error("Update failed.");
     }
   };
 
   const handleDeleteCategory = async () => {
     try {
-      const result = await deleteCategory(selectedCategory._id).unwrap();
-      toast.success(`Category deleted successfully`);
+      await deleteCategory(selectedCategory._id).unwrap();
+      toast.success(`Category deleted`);
       setSelectedCategory(null);
       setUpdatingName("");
       setModalVisible(false);
       refetch();
     } catch (error) {
-      toast.error("Deleting category failed, Try again.");
+      toast.error("Delete failed.");
     }
   };
 
   return (
-    <div className="bg-[#0a0a0c] min-h-screen text-white pb-20">
+    <div className="bg-[#0a0a0c] min-h-screen text-white pb-32">
       <AdminMenu />
 
-      <div className="container mx-auto px-4 pt-[6rem]">
-        {/* Header Section */}
+      <div className="container mx-auto px-5 pt-[6rem]">
+        {/* Header */}
         <div className="flex items-center gap-4 mb-10">
-          <div className="p-3 bg-pink-500/20 rounded-2xl text-pink-500 shadow-[0_0_15px_rgba(236,72,153,0.1)]">
+          <div className="p-3 bg-pink-500/20 rounded-2xl text-pink-500">
             <FaShapes size={24} />
           </div>
-          <div>
-            <h1 className="text-3xl font-extrabold tracking-tight">
-              Product Categories
-            </h1>
-            <p className="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1">
-              Organize your inventory
-            </p>
-          </div>
+          <h1 className="text-3xl font-extrabold tracking-tight uppercase">
+            Manage <span className="text-pink-500">Categories</span>
+          </h1>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Form Side */}
+          {/* Create Section */}
           <div className="lg:col-span-1">
-            <div className="bg-slate-900/40 border border-slate-800 p-8 rounded-3xl backdrop-blur-md sticky top-[8rem]">
-              <h2 className="flex items-center gap-2 text-lg font-bold mb-6 text-slate-200">
-                <FaPlusCircle className="text-indigo-500" /> Create New
+            <div className="bg-slate-900/60 border border-slate-800 p-8 rounded-[2.5rem] backdrop-blur-md sticky top-[8rem] shadow-2xl">
+              <h2 className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest mb-6 text-slate-400">
+                <FaPlusCircle className="text-indigo-500" /> Add New Category
               </h2>
               <CategoryForm
                 value={name}
                 setValue={setName}
                 handleSubmit={handleCreateCategory}
+                buttonText="Create"
               />
             </div>
           </div>
 
-          {/* List Side */}
+          {/* Categories List */}
           <div className="lg:col-span-2">
             <div className="flex flex-wrap gap-4">
               {categories?.map((category) => (
@@ -118,40 +114,40 @@ const CategoryList = () => {
                     setSelectedCategory(category);
                     setUpdatingName(category.name);
                   }}
-                  className="group flex items-center gap-3 bg-slate-900/50 border border-slate-800 px-6 py-3 rounded-2xl transition-all duration-300 hover:border-pink-500/50 hover:bg-pink-500/5 hover:translate-y-[-2px] active:scale-95 shadow-sm"
+                  className="group flex items-center gap-3 bg-slate-900/60 border border-slate-800 px-6 py-4 rounded-2xl transition-all hover:border-pink-500/50 hover:bg-pink-500/5 hover:-translate-y-1 active:scale-95 shadow-xl"
                 >
-                  <span className="font-semibold text-slate-300 group-hover:text-pink-400 transition-colors">
+                  <span className="font-bold text-slate-200 group-hover:text-pink-400">
                     {category.name}
                   </span>
                   <FaEdit
-                    size={12}
-                    className="text-slate-600 group-hover:text-pink-400 opacity-0 group-hover:opacity-100 transition-all"
+                    size={14}
+                    className="text-slate-600 group-hover:text-pink-400"
                   />
                 </button>
               ))}
             </div>
 
             {categories?.length === 0 && (
-              <div className="text-center py-20 border-2 border-dashed border-slate-800 rounded-3xl">
-                <p className="text-slate-500 italic">
-                  No categories found. Start by creating one!
+              <div className="text-center py-24 border-2 border-dashed border-slate-800 rounded-[2.5rem] bg-slate-900/20">
+                <p className="text-slate-500 font-medium italic">
+                  No categories found.
                 </p>
               </div>
             )}
           </div>
         </div>
 
-        {/* Edit Modal */}
+        {/* Update Modal */}
         <Modal isOpen={modalVisible} onClose={() => setModalVisible(false)}>
-          <div className="p-4">
-            <h3 className="text-xl font-bold mb-6 text-slate-200">
+          <div className="p-8 bg-[#0a0a0c] rounded-[2.5rem] border border-slate-800 shadow-2xl">
+            <h3 className="text-xl font-black uppercase tracking-tight mb-8">
               Update Category
             </h3>
             <CategoryForm
               value={updatingName}
               setValue={setUpdatingName}
               handleSubmit={handleUpdateCategory}
-              buttonText="Update Changes"
+              buttonText="Save Changes"
               handleDelete={handleDeleteCategory}
             />
           </div>

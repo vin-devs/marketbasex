@@ -6,14 +6,29 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <>
-      <ToastContainer />
+      {/* Optimized Toast Notifications for Dark UI */}
+      <ToastContainer
+        theme="dark"
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        toastClassName="bg-[#111114] border border-slate-800 rounded-2xl shadow-2xl font-bold uppercase text-[10px] tracking-widest text-white"
+        progressClassName="bg-gradient-to-r from-pink-500 to-indigo-500"
+      />
+
       <Navigation />
 
-      {/* pb-20: Space at bottom for Mobile Nav 
-          md:pb-0: Remove bottom space on Desktop
-          md:pl-20: Space on left for Desktop Sidebar
+      {/* pb-24: Extra breathing room for the bottom Mobile Nav
+          md:pb-0: Reset for desktop
+          md:pl-20: Left-side space for the sidebar navigation
       */}
-      <main className="py-3 pb-24 md:pb-0 md:pl-20 min-h-screen transition-all duration-300">
+      <main className="py-3 pb-24 md:pb-0 md:pl-20 min-h-screen bg-[#0a0a0c] transition-all duration-300">
         <Outlet />
       </main>
     </>
